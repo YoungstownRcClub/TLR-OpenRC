@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "id": "car01",
+  "timestamp": 1715895721,
+  "mode": "manual",
+  "control": {
+    "throttle": 60,
+    "steering": 50,
+    "reverse": false,
+    "handbrake": false
+  }
+}
+

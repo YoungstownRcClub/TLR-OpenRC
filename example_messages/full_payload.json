@@ -1,0 +1,29 @@
+{
+  "version": "1.0",
+  "id": "car01",
+  "timestamp": 1715895721,
+  "mode": "manual",
+  "control": {
+    "throttle": 50,
+    "steering": 52,
+    "reverse": true,
+    "handbrake": false
+  },
+  "headTracking": {
+    "enabled": true,
+    "pan": 1560,
+    "tilt": 1440
+  },
+  "sensors": {
+    "distanceFront": 42,
+    "imu": {
+      "pitch": -0.5,
+      "roll": 2.3
+    }
+  },
+  "telemetry": {
+    "batteryVoltage": 7.1,
+    "temperatureESC": 38.5
+  }
+}
+
