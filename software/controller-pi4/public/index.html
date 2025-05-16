@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TLR Control Interface</title>
+  <style>
+    input[type=range] { width: 300px; }
+    button { padding: 10px; margin: 5px; }
+  </style>
+</head>
+<body>
+  <h1>TLR OpenRC Control</h1>
+
+  <label>Throttle</label><br>
+  <input type="range" id="throttle" min="0" max="100" value="50"><br>
+
+  <label>Steering</label><br>
+  <input type="range" id="steering" min="0" max="100" value="50"><br>
+
+  <button onclick="toggleReverse()">Reverse</button>
+  <button onclick="toggleBrake()">Handbrake</button>
+
+  <script>
+    const socket = new WebSocket("ws://" + location.hostname + ":3000");
+    let reverse = false;
+    let handbrake = false;
+
+    function sendControl() {
+      const message = {
+        version: "1.0",
+        id: "car01",
+        timestamp: Math.floor(Date.now() / 1000),
+        mode: "manual",
+        control: {
+          throttle: parseInt(document.getElementById("throttle").value),
+          steering: parseInt(document.getElementById("steering").value),
+          reverse: reverse,
+          handbrake: handbrake
+        }
+      };
+      socket.send(JSON.stringify(message));
+    }
+
+    function toggleReverse() {
+      reverse = !reverse;
+      sendControl();
+    }
+
+    function toggleBrake() {
+      handbrake = !handbrake;
+      sendControl();
+    }
+
+    document.getElementById("throttle").addEventListener("input", sendControl);
+    document.getElementById("steering").addEventListener("input", sendControl);
+  </script>
+</body>
+</html>
